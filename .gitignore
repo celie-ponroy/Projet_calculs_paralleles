@@ -2,7 +2,6 @@
 .idea
 out
 out/
-*.class
 .DS_Store
 .vscode/
 mvnw

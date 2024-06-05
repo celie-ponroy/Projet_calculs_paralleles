@@ -4,8 +4,6 @@ import java.rmi.server.ServerNotActiveException;
 import java.util.ArrayList;
 import java.util.List;
 
-import raytracer.RayTracer;
-
 public class Service implements InterfaceService {
     List<RayTracer> listraytracer;
 

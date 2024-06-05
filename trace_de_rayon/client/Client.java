@@ -4,10 +4,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import raytracer.Disp;
-import raytracer.Image;
-import raytracer.RayTracer;
-import raytracer.Scene;
+
 
 public class Client implements InterfaceClient {
     private List<RayTracer> liste_tracer;
@@ -36,7 +33,7 @@ public class Client implements InterfaceClient {
      */
     
      @Override
-    public void lancerCalcul(int largeur, int hauteur){
+    public void lancerCalcul(int largeur, int hauteur) throws RemoteException, ServerNotActiveException{
         Disp disp = new Disp("Raytracer", largeur, hauteur);
         Scene scene = new Scene(fichier_description, largeur, hauteur);
         if(liste_tracer.size()==0){
@@ -58,7 +55,7 @@ public class Client implements InterfaceClient {
                 Image image;
                 try{
                     image = rayTracer.compute(scene, x0, y0, l, h, 10, 1);
-                }catch(RemoteException r){
+                }catch(Exception r){
                     // donner le process pour que service l'enlève
                     service.supprimerRayTracer(rayTracer);
                     demanderProxy(service);

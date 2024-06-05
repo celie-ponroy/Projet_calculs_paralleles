@@ -4,10 +4,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 
-import raytracer.Disp;
-import raytracer.Image;
-import raytracer.RayTracer;
-import raytracer.Scene;
 
 public interface InterfaceClient {
     /**
@@ -19,5 +15,5 @@ public interface InterfaceClient {
      /**
      * demande à sa liste de client de calculer une partie d'image
      */
-    public void lancerCalcul(int largeur, int hauteur);
+    public void lancerCalcul(int largeur, int hauteur) throws RemoteException, ServerNotActiveException;
 }

@@ -3,7 +3,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.ServerNotActiveException;
 import java.util.List;
 
-import raytracer.RayTracer;
 
 public interface InterfaceService extends Remote{
    public void enregistrerRayTracer(RayTracer c) throws RemoteException, ServerNotActiveException;

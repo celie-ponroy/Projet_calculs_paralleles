@@ -1,4 +1,4 @@
-package raytracer;
+
 import java.io.*;
 
 /**

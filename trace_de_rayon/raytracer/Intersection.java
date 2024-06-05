@@ -1,4 +1,4 @@
-package raytracer;
+
 import java.util.Iterator;
 
 public class Intersection extends Point{
