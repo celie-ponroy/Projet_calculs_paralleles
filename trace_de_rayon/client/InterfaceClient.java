@@ -9,5 +9,5 @@ public interface InterfaceClient {
      /**
      * demande à sa liste de client de calculer une partie d'image
      */
-    public void lancerCalcul(int largeur, int hauteur) throws RemoteException, ServerNotActiveException;
+    public void lancerCalcul(int largeur, int hauteur, int numChunks) throws RemoteException, ServerNotActiveException;
 }

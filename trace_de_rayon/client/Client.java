@@ -21,7 +21,7 @@ public class Client implements InterfaceClient {
      * demande à sa liste de client de calculer une partie d'image
      */
     @Override
-    public void lancerCalcul(int largeur, int hauteur) throws RemoteException, ServerNotActiveException {
+    public void lancerCalcul(int largeur, int hauteur, int numChunks) throws RemoteException, ServerNotActiveException {
         Disp disp = new Disp("Raytracer", largeur, hauteur);
         Scene scene = new Scene(fichier_description, largeur, hauteur);
 
@@ -29,15 +29,15 @@ public class Client implements InterfaceClient {
             Image image = new RayTracer(largeur, hauteur).compute(scene, 0, 0, largeur, hauteur, 10, 1);
             disp.setImage(image, 0, 0);
         } else {
-            // Calcul de l'image sur tous les noeuds de la liste à l'aide de Threads
+            // Définir le nombre de découpes de l'image
             int numTracers = liste_tracer.size();
-            int chunkWidth = largeur / numTracers;
-            int chunkHeight = hauteur / numTracers;
+            int chunkWidth = largeur / numChunks;
+            int chunkHeight = hauteur / numChunks;
 
-            for (int i = 0; i < numTracers; i++) {
-                ServiceRayTracer rayTracer = liste_tracer.get(i);
-                final int x0 = (i % numTracers) * chunkWidth;
-                final int y0 = (i / numTracers) * chunkHeight;
+            for (int chunkIndex = 0; chunkIndex < numChunks * numChunks; chunkIndex++) {
+                ServiceRayTracer rayTracer = liste_tracer.get(chunkIndex % numTracers);
+                final int x0 = (chunkIndex % numChunks) * chunkWidth;
+                final int y0 = (chunkIndex / numChunks) * chunkHeight;
 
                 Thread thread = new Thread(new Runnable() {
                     @Override
@@ -62,7 +62,8 @@ public class Client implements InterfaceClient {
                                 return;
                             }
                             // Relancer un thread si une exception se produit
-                            image = new RayTracer(chunkWidth, chunkHeight).compute(scene, x0, y0, chunkWidth, chunkHeight, 10, 1);
+                            image = new RayTracer(chunkWidth, chunkHeight).compute(scene, x0, y0, chunkWidth,
+                                    chunkHeight, 10, 1);
                         }
                         Instant fin = Instant.now();
                         long duree = Duration.between(debut, fin).toMillis();
