@@ -24,10 +24,10 @@ public class Client implements InterfaceClient {
     public void lancerCalcul(int largeur, int hauteur) throws RemoteException, ServerNotActiveException {
         Disp disp = new Disp("Raytracer", largeur, hauteur);
         Scene scene = new Scene(fichier_description, largeur, hauteur);
+        int x0 = 0, y0 = 0;
+        int l = largeur;
+        int h = hauteur;
         if (liste_tracer.isEmpty()) {
-            int x0 = 0, y0 = 0;
-            int l = largeur;
-            int h = hauteur;
             Image image = new RayTracer(l, h).compute(scene, x0, y0, l, h, 10, 1);
             disp.setImage(image, x0, y0);
         } else {
@@ -57,12 +57,20 @@ public class Client implements InterfaceClient {
                         Instant fin = Instant.now();
                         long duree = Duration.between(debut, fin).toMillis();
                         System.out.println("Image calculée en :" + duree + " ms");
-                        disp.setImage(image, 0, 0);
+                        disp.setImage(image, x0, 0);
+                        if (x0 != largeur){
+                            x0 = x0 + l;
+                        }  
+                        else {
+                            x0 = 0;
+                            y0 += h;
+                        }
                     }
-                }
-                );
+                });
                 thread.run();
             }
+        }
+    }
 
 /*
             //divisions le l'image 

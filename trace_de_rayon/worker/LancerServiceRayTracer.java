@@ -16,6 +16,7 @@ public class LancerServiceRayTracer {
 
         try {
             Registry reg = LocateRegistry.getRegistry(serveur, port);
+            System.out.println("Connexion à l'annuaire réussie");
             try {
                 InterfaceService distributeurNoeuds = (InterfaceService) reg.lookup("distributeurNoeuds");
                 try {
