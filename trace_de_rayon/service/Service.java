@@ -1,25 +1,24 @@
-
 import java.rmi.RemoteException;
 import java.rmi.server.ServerNotActiveException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Service implements InterfaceService {
-    List<RayTracer> listraytracer;
+    ArrayList<ServiceRayTracer> listraytracer;
 
-    Service(){
+    public Service() {
         this.listraytracer = new ArrayList<>();
     }
 
-    public void enregistrerRayTracer(RayTracer c) throws RemoteException, ServerNotActiveException {
+    public void enregistrerRayTracer(ServiceRayTracer c) throws RemoteException, ServerNotActiveException {
         listraytracer.add(c);
     }
 
-    public List<RayTracer> demanderProxys(){
+    public ArrayList<ServiceRayTracer> demanderProxys() {
         return this.listraytracer;
     }
-    public void supprimerRayTracer(RayTracer rayTracer){
+
+    public void supprimerProxy(ServiceRayTracer rayTracer) {
         listraytracer.remove(rayTracer);
     }
-    
+
 }

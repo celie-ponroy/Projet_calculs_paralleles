@@ -1,9 +1,11 @@
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.io.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 
-public class RayTracer implements Serializable {
+public class RayTracer implements Serializable, Remote {
     private int width;
     private int height;
     

@@ -9,7 +9,7 @@ public class LancerRaytracer {
 
     public static String aide = "Raytracer : synthèse d'image par lancé de rayons (https://en.wikipedia.org/wiki/Ray_tracing_(graphics))\n\nUsage : java LancerRaytracer [fichier-scène] [largeur] [hauteur]\n\tfichier-scène : la description de la scène (par défaut simple.txt)\n\tlargeur : largeur de l'image calculée (par défaut 512)\n\thauteur : hauteur de l'image calculée (par défaut 512)\n";
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         // Le fichier de description de la scène si pas fournie
         String fichier_description = "simple.txt";

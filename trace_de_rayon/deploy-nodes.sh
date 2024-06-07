@@ -80,6 +80,12 @@ case $room in
         max_ip="223"
         node_list=$(seq -f "${ip_prefix}.%g" ${min_ip} ${max_ip})
         ;;
+    pc021)
+        ip_prefix="100.64.80"
+        min_ip="192"
+        max_ip="207"
+        node_list=$(seq -f "${ip_prefix}.%g" ${min_ip} ${max_ip})
+        ;;
     local)
         node_list=$(yes "127.0.0.1" | head -n 10)
         ;;
