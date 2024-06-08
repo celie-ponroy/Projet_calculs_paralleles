@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
-public class Client implements InterfaceClient {
+public class Client {
     private ArrayList<ServiceRayTracer> liste_tracer;
     private String fichier_description;
     private InterfaceService service;
@@ -20,7 +20,6 @@ public class Client implements InterfaceClient {
     /**
      * demande à sa liste de client de calculer une partie d'image
      */
-    @Override
     public void lancerCalcul(int largeur, int hauteur, int numChunks) throws RemoteException, ServerNotActiveException {
         Disp disp = new Disp("Raytracer", largeur, hauteur);
         Scene scene = new Scene(fichier_description, largeur, hauteur);
